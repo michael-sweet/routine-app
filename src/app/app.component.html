@@ -1,0 +1,14 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>Sidenav</mat-sidenav>
+  <mat-sidenav-content>
+  <mat-toolbar>
+    <button mat-icon-button (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{ title }}</span>
+  </mat-toolbar>
+  <div class="main-content">
+    <app-active-routine></app-active-routine>
+  </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

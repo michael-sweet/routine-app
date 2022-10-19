@@ -1,0 +1,44 @@
+<div class="header">
+  <h1>{{ routine.name }}</h1>
+  <button mat-icon-button (click)="startRoutine()" *ngIf="!active">
+    <mat-icon>play_circle</mat-icon>
+  </button>
+  <button mat-icon-button (click)="pauseRoutine()" *ngIf="active">
+    <mat-icon>pause_circle</mat-icon>
+  </button>
+</div>
+
+<mat-accordion>
+  <mat-expansion-panel
+    *ngFor="let task of routine.tasks; index as i"
+    class="task"
+    [ngClass]="{'active': i == activeTask}"
+    [expanded]="i == activeTask"
+  >
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ task.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ remainingTime[i] | time }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div>
+      <p>{{ task.description }}</p>
+      <div class="panel-button-wrapper">
+        <button mat-icon-button (click)="editTask(i)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="startTask(i)" *ngIf="(i != activeTask || !active) && remainingTime[i]">
+          <mat-icon>play_circle</mat-icon>
+        </button>
+        <button mat-icon-button (click)="pauseRoutine()" *ngIf="(i == activeTask && active) && remainingTime[i]">
+          <mat-icon>pause_circle</mat-icon>
+        </button>
+        <button mat-icon-button (click)="resetTask(i)" *ngIf="remainingTime[i] == 0">
+          <mat-icon>restart_alt</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
